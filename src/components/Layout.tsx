@@ -39,7 +39,8 @@ export default function ({ children }: PropsWithChildren) {
       </header>
       <Main>{children}</Main>
       <Footer>
-        Made by <a href="https://github.com/OhBeomho">OhBeomho</a>
+        Made by <a href="https://github.com/OhBeomho">OhBeomho</a><br />
+        Source on <a href="https://github.com/OhBeomho/unit-convert">GitHub</a>
       </Footer>
     </Wrapper>
   )

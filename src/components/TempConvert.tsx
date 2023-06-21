@@ -4,7 +4,7 @@ import SelectStyled from "./Select.styled"
 
 type Unit = "celsius" | "kelvin" | "fahrenheit"
 const units: Unit[] = ["celsius", "kelvin", "fahrenheit"]
-const unitSymbols = ["℃", "℉", "K"]
+const unitSymbols = ["℃", "K", "℉"]
 
 function ctk(value: number) {
   return value + 273.15
