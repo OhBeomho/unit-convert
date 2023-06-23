@@ -45,39 +45,26 @@ export default function () {
     }
 
     let result
+    const isMetric = (unit: Unit) => metricUnits.includes(unit)
+    const fromList = isMetric(fromUnit) ? metricUnits : imperialUnits
+    const toList = isMetric(toUnit) ? metricUnits : imperialUnits
 
-    if (metricUnits.includes(fromUnit) && metricUnits.includes(toUnit)) {
-      const fromIndex = metricUnits.indexOf(fromUnit)
-      const toIndex = metricUnits.indexOf(toUnit)
-
-      let changes
-      let change = 1
-
-      if (fromIndex < toIndex) {
-        changes = metricChanges.slice(fromIndex, toIndex)
-        for (let c of changes) change /= c
-      } else {
-        changes = metricChanges.slice(toIndex, fromIndex)
-        for (let c of changes) change *= c
-      }
-
-      result = value * change
-    } else if (imperialUnits.includes(fromUnit) && imperialUnits.includes(toUnit)) {
-      const fromIndex = imperialUnits.indexOf(fromUnit)
-      const toIndex = imperialUnits.indexOf(toUnit)
+    if (fromList === toList) {
+      const fromIndex = fromList.indexOf(fromUnit)
+      const toIndex = toList.indexOf(toUnit)
+      const changeList = isMetric(fromUnit) ? metricChanges : imperialChanges
 
       let changes
       let change = 1
 
       if (fromIndex < toIndex) {
-        changes = imperialChanges.slice(fromIndex, toIndex)
+        changes = changeList.slice(fromIndex, toIndex)
         for (let c of changes) change /= c
       } else {
-        changes = imperialChanges.slice(toIndex, fromIndex)
+        changes = changeList.slice(toIndex, fromIndex)
         for (let c of changes) change *= c
       }
 
-      for (let c of changes) change *= c
       result = value * change
     } else {
       if (metricUnits.includes(fromUnit)) {
